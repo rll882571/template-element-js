@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treino de Validação Nativa</title>
+    <link rel="stylesheet" href="teste2.css">
+</head>
+<body>
+
+    <div class="container">
+        <h2>📝 Cadastro de Usuário</h2>
+        <p>O navegador vai checar se os dados seguem as regras do HTML automaticamente.</p>
+
+        <form id="meuFormulario" novalidate>
+            <div class="campo-grupo">
+                <label for="inputNome">Nome de Usuário (Mínimo 3 letras):</label>
+                <input type="text" id="inputNome" required minlength="3" placeholder="Digite seu nome">
+                <span class="erro-mensagem" id="erroNome"></span>
+            </div>
+
+            <div class="campo-grupo">
+                <label for="inputIdade">Idade (Permitido de 18 a 100 anos):</label>
+                <input type="number" id="inputIdade" required min="18" max="100" placeholder="Ex: 25">
+                <span class="erro-mensagem" id="erroIdade"></span>
+            </div>
+
+            <button type="submit">Criar Conta</button>
+        </form>
+
+        <div id="sucessoMensagem" class="sucesso-box" style="display: none;">
+            🎉 Conta criada com sucesso e validada pelo navegador!
+        </div>
+    </div>
+
+    <script src="teste2.js"></script>
+</body>
+</html>

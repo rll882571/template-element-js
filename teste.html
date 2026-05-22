@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treino de APIs de Armazenamento</title>
+    <link rel="stylesheet" href="teste.css">
+</head>
+<body>
+
+    <div class="container">
+        <h2>Painel de Armazenamento do Navegador</h2>
+        <p>Preencha os campos abaixo para testar as memórias.</p>
+
+        <div class="painel-grid">
+            <div class="card local-card">
+                <h3>💾 Local Storage (Permanente)</h3>
+                <p>Os dados salvos aqui continuam vivos mesmo se você fechar o navegador ou desligar o PC.</p>
+                <input type="text" id="inputLocal" placeholder="Digite seu nome...">
+                <button id="btnLocal">Salvar no Local</button>
+                <div class="resultado">Salvo atual: <strong id="txtLocal">Nenhum</strong></div>
+            </div>
+
+            <div class="card session-card">
+                <h3>⏳ Session Storage (Temporário)</h3>
+                <p>Os dados salvos aqui somem completamente no segundo em que você fechar esta aba.</p>
+                <input type="text" id="inputSession" placeholder="Digite o token da sessão...">
+                <button id="btnSession">Salvar na Sessão</button>
+                <div class="resultado">Salvo atual: <strong id="txtSession">Nenhum</strong></div>
+            </div>
+        </div>
+        
+        <button id="btnReset" class="reset-all">Limpar Tudo</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

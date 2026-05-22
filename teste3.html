@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treino de Geolocalização</title>
+    <link rel="stylesheet" href="teste3.css">
+</head>
+<body>
+
+    <div class="container">
+        <h2>📍 Rastreador de Localização</h2>
+        <p>Clique no botão abaixo para pedir autorização ao navegador e ler suas coordenadas geográficas.</p>
+
+        <button id="btnLocalizar">Obter Minha Posição</button>
+
+        <div id="painelDados" class="painel-coordenadas" style="display: none;">
+            <p><strong>Latitude:</strong> <span id="latTexto">-</span></p>
+            <p><strong>Longitude:</strong> <span id="lonTexto">-</span></p>
+            <div class="alerta-gps">✓ Coordenadas obtidas com sucesso via API nativa!</div>
+        </div>
+
+        <div id="mensagemErro" class="erro-box" style="display: none;"></div>
+    </div>
+
+    <script src="teste3.js"></script>
+</body>
+</html>
