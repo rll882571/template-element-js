@@ -6,7 +6,7 @@ const fetchButton = document.getElementById("fetch-btn");
 async function loadCustomers() {
     try {
         // Coloca uma mensagem visual de carregamento na tela antes dos dados virem
-        gridContainer.innerHTML = `<div class="status-msg">Carregando dados dos clientes...</div>`;
+        gridContainer.innerHTML = "Carregando dados dos clientes...";
         
         const apiUrl = "https://jsonplaceholder.typicode.com/users";
         const response = await fetch(apiUrl);
@@ -34,6 +34,8 @@ async function loadCustomers() {
                 <p class="email">📧 ${customer.email}</p>
                 <p>🏢 <strong>Empresa:</strong> ${customer.company.name}</p>
                 <p>📍 <strong>Cidade:</strong> ${customer.address.city}</p>
+                
+
             `;
 
             // Jogamos o card novinho dentro do nosso grid visível na tela
