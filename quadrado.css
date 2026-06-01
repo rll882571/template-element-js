@@ -1,0 +1,80 @@
+/* 1. ROTEIRO DA ANIMAÇÃO (Isolado) */
+@keyframes pulsa-ponto {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(1.2);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* 2. ESTRUTURA DO CARTÃO (Aninhado) */
+.testimonial-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 24px;
+  max-width: 320px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  /* Filho: Área da Foto */
+  .profile-area {
+    position: relative;
+    width: 50px;
+    height: 50px;
+
+    /* Neto: Imagem do Avatar */
+    .avatar {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    /* Neto: Bolinha Online (Usa a Animação) */
+    .online-indicator {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 12px;
+      height: 12px;
+      background-color: #2ecc71;
+      border-radius: 50%;
+      border: 2px solid white;
+      animation: pulsa-ponto 2s infinite ease-in-out;
+    }
+  }
+
+  /* Filho: Título */
+  h3 {
+    margin: 12px 0 4px 0;
+    color: #333333;
+  }
+
+  /* Filho: Parágrafo */
+  p {
+    color: #666666;
+    font-style: italic;
+    font-size: 0.95rem;
+  }
+
+  /* Filho: Botão (Usa a Transição) */
+  .btn-like {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 8px 0;
+    font-size: 1rem;
+    transition: transform 0.2s ease;
+
+    /* Estado do Botão */
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}

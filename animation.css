@@ -1,0 +1,56 @@
+/* 1. Criando a ANIMAÇÃO (O roteiro que roda sozinho) */
+@keyframes pulsar {
+  0% {
+    transform: scale(1);
+    background-color: #ff3333;
+  }
+  50% {
+    transform: scale(1.1); /* Dá um leve zoom */
+    background-color: #ff6666; /* Muda de cor */
+  }
+  100% {
+    transform: scale(1);
+    background-color: #ff3333;
+  }
+}
+
+/* 2. Aplicando tudo de forma estruturada e aninhada */
+.product-card2 {
+  background: #fff;
+  padding: 20px;
+  position: relative; /* Necessário para posicionar o selo */
+  
+  /* Tag filha do selo (Usa ANIMATION) */
+  .badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: white;
+    padding: 5px 10px;
+    font-weight: bold;
+    
+    /* Aplica o roteiro 'pulsar' para rodar infinitamente */
+    animation: pulsar 1.5s infinite ease-in-out; 
+  }
+
+  h2 {
+    color: #333;
+  }
+
+  /* Tag filha do botão (Usa TRANSITION) */
+  .btn-buy2 {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    
+    /* TRANSIÇÃO: Avisa pro navegador suavizar qualquer mudança de cor em 0.3 segundos */
+    transition: background-color 0.3s ease; 
+
+    /* Estado de Hover usando o nosso querido &: */
+    &:hover {
+      background-color: #0056b3; /* A transição deixa essa mudança suave */ 
+    }
+  }
+}

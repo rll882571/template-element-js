@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulador de Call Stack</title>
+  <link rel="stylesheet" href="callStacks.css">
+</head>
+<body>
+
+  <div class="container">
+    <h1>Simulador de Call Stack do JavaScript</h1>
+    <p>Clique em "Executar" para ver como as funções entram (PUSH) e saem (POP) da pilha de chamadas.</p>
+
+    <div class="controls">
+      <button id="btn-run">▶ Executar Código</button>
+      <button id="btn-reset" disabled>🔄 Resetar</button>
+    </div>
+
+    <div class="simulation-area">
+      <div class="stack-container">
+        <h3>Call Stack (Pilha)</h3>
+        <div id="stack" class="stack">
+          <div class="stack-empty">Pilha Vazia (Global Execution Context)</div>
+        </div>
+      </div>
+
+      <div class="console-container">
+        <h3>Console Output</h3>
+        <div id="console-log" class="console-log"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="callStacks.js"></script>
+</body>
+</html>

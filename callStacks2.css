@@ -1,0 +1,114 @@
+/* Configuração Geral */
+body {
+  background-color: #eef2f3;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+/* Caixa Principal do Sistema (Usada nas duas páginas) */
+.order-container {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  max-width: 450px;
+  width: 100%;
+
+  h2 {
+    color: #2c3e50;
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-align: center;
+    border-bottom: 2px solid #f1f1f1;
+    padding-bottom: 10px;
+  }
+
+  /* Grupos de Campos (Inputs da primeira página) */
+  .form-group {
+    margin-bottom: 20px;
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      color: #34495e;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      box-sizing: border-box;
+      font-size: 1rem;
+      transition: border-color 0.2s;
+
+      &:focus {
+        border-color: #3498db;
+        outline: none;
+      }
+    }
+  }
+
+  /* Botão de Ação (Verde na pág 1 e Azul na pág 2 devido ao style inline) */
+  #btn-processar {
+    width: 100%;
+    padding: 14px;
+    background-color: #2ecc71; /* Verde padrão */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    margin-top: 10px;
+
+    &:hover {
+      filter: brightness(0.9); /* Escurece um pouco no hover, funcionando para o verde e o azul */
+    }
+
+    &:active {
+      transform: scale(0.98);
+    }
+  }
+
+  /* Painel de Exibição do Recibo (Usado na página resumo.html) */
+  .status-box {
+    margin-top: 24px;
+    background-color: #f8f9fa;   /* Cinza claro de nota fiscal */
+    color: #2c3e50;
+    padding: 18px;
+    border-radius: 8px;
+    border: 1px dashed #bdc3c7;   /* Borda tracejada estilo cupom */
+    font-size: 0.95rem;
+    min-height: 100px;
+
+    h3 {
+      margin-top: 0;
+      color: #7f8c8d;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 6px;
+      margin-bottom: 12px;
+    }
+
+    #status-output {
+      white-space: pre-line;
+      line-height: 1.6;
+      font-weight: 500;
+      
+      /* Estilo extra para os parágrafos que o JS vai injetar */
+      p {
+        margin: 8px 0;
+      }
+    }
+  }
+}
