@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exemplo Prático de Callback</title>
+  <link rel="stylesheet" href="callbacks.css">
+</head>
+<body>
+
+  <div class="container">
+    <h1>Minha Galeria Dinâmica</h1>
+    <p>Clique nos botões para simular uma busca assíncrona usando <strong>Callback</strong>.</p>
+
+    <div class="buttons-container">
+      <button onclick="filtrarGaleria('todos')">Mostrar Todos</button>
+      <button onclick="filtrarGaleria('natureza')">Natureza</button>
+      <button onclick="filtrarGaleria('cidade')">Cidades</button>
+    </div>
+
+    <div id="status" class="status-mensagem"></div>
+
+    <div id="galeria" class="galeria-grid"></div>
+  </div>
+
+  <script src="callbacks.js"></script>
+</body>
+</html>
+
+/* ===================================================================
+      EXPLICAÇÃO DETALHADA DA LÓGICA DO SCRIPT (COM CALLBACK)
+===================================================================
+
+Para entender esse código, você precisa focar em 3 etapas principais:
+1. O Banco de Dados (onde as informações estão salvas).
+2. A Função do Servidor (que simula a internet e usa o CALLBACK).
+3. A Função de Renderização (que desenha o resultado na tela).
+
+Vamos analisar linha por linha como a máquina processa tudo isso:
+*/
+
+// ================================================================
+// ETAPA 1: O BANCO DE DADOS SIMULADO
+// ================================================================
+// Aqui criamos um array de objetos chamado 'bancoDeDados'.
+// Ele simula as informações que normalmente estariam salvas em um 
+// servidor de verdade na internet (como o jsonplaceholder que está no seu PDF).
+const bancoDeDados = [
+  { id: 1, categoria: 'natureza', nome: '🌲 Floresta Tropical' },
+  { id: 2, categoria: 'cidade', nome: '🏙️ Nova York à Noite' },
+  { id: 3, categoria: 'natureza', nome: '🏔️ Montanhas Nevadas' },
+  { id: 4, categoria: 'cidade', nome: '🗼 Torre Eiffel' }
+];
+
+// ================================================================
+// ETAPA 2: A FUNÇÃO ASSÍNCRONA COM CALLBACK
+// ================================================================
+// Esta é a função mais importante. Ela recebe dois parâmetros:
+// - 'categoriaFiltro': o texto dizendo o que o usuário quer ver ('todos', 'natureza'...).
+// - 'acaoDeCallback': ISSO AQUI É UMA FUNÇÃO! Passamos uma função como se fosse uma variável.
+function buscarDadosDoServidor(categoriaFiltro, acaoDeCallback) {
+  
+  // 1. Pegamos a caixinha de status do HTML para avisar o usuário que está carregando.
+  const statusDiv = document.getElementById('status');
+  statusDiv.innerText = "Buscando dados no servidor (aguarde)...";
+  
+  // 2. Limpamos a tela. Se já tinha alguma foto aparecendo antes, ela some agora.
+  document.getElementById('galeria').innerHTML = "";
+
+  // 3. O SIMULADOR DE INTERNET (setTimeout)
+  // O JavaScript lê essa linha e ativa um cronômetro de 1000 milissegundos (1 segundo).
+  // Enquanto esse 1 segundo não passa, o navegador NÃO TRAVA. Ele continua livre.
+  setTimeout(function() {
+    
+    // --- TUDO AQUI DENTRO SÓ EXECUTA DEPOIS DE 1 SEGUNDO ---
+    
+    // Atualizamos o texto de status, já que a "espera" acabou.
+    statusDiv.innerText = "Dados carregados com sucesso!";
+    
+    // Criamos uma variável vazia para guardar as fotos filtradas.
+    let resultado = [];
+    
+    // Lógica do Filtro:
+    // Se o usuário escolheu 'todos', a variável 'resultado' recebe todo o nosso banco de dados.
+    if (categoriaFiltro === 'todos') {
+      resultado = bancoDeDados;
+    } else {
+      // Se escolheu 'natureza' ou 'cidade', a máquina varre o banco de dados e guarda 
+      // apenas os itens onde a categoria seja igual ao que foi clicado.
+      resultado = bancoDeDados.filter(item => item.categoria === categoriaFiltro);
+    }
+
+    // 4. A MÁGICA DO CALLBACK OCORRE AQUI!
+    // A variável 'acaoDeCallback' guarda a função 'renderizarTela' (que enviamos lá embaixo).
+    // Ao colocarmos os parênteses nela 'acaoDeCallback(resultado)', estamos dizendo:
+    // "Máquina, agora que o 1 segundo passou e o filtro está pronto, execute a função 
+    // de desenho que você recebeu lá no começo, e entregue esse 'resultado' para ela!"
+    acaoDeCallback(resultado);
+
+  }, 1000); // Fim do tempo de espera de 1 segundo.
+}
+
+// ================================================================
+// ETAPA 3: A FUNÇÃO DE RENDERIZAÇÃO (O CALLBACK EM SI)
+// ================================================================
+// Esta função tem apenas UM trabalho: receber uma lista de itens e desenhar no HTML.
+// Ela não sabe de onde os dados vieram, não sabe quanto tempo demorou. Ela só desenha.
+function renderizarTela(itens) {
+  
+  // Pegamos o container da galeria no HTML.
+  const galeriaDiv = document.getElementById('galeria');
+  
+  // Usamos um laço (forEach) para passar por cada item da lista que recebemos.
+  itens.forEach(item => {
+    // Para cada item, criamos uma nova tag <div> na memória do computador.
+    const card = document.createElement('div');
+    
+    // Adicionamos a classe CSS 'item-galeria' nela para ficar bonita.
+    card.className = 'item-galeria';
+    
+    // Colocamos o nome do item (ex: "🗼 Torre Eiffel") dentro dessa div.
+    card.innerText = item.nome;
+    
+    // Jogamos essa nova div criada direto para dentro do nosso HTML físico.
+    galeriaDiv.appendChild(card);
+  });
+}
+
+// ================================================================
+// ETAPA 4: O DISPARADOR (INTERAÇÃO DO USUÁRIO)
+// ================================================================
+// Esta é a função que é chamada direto nos botões do HTML via `onclick`.
+function filtrarGaleria(categoria) {
+  
+  // Aqui nós juntamos as peças! Chamamos a função de busca passando:
+  // 1. A categoria que o usuário clicou (ex: 'natureza').
+  // 2. A função 'renderizarTela' SOLTA (sem os parênteses dela!).
+  //
+  // Ao passar 'renderizarTela' sem parênteses, nós não estamos executando ela agora. 
+  // Estamos apenas entregando o "molde" dela para o servidor usar no momento certo (depois de 1s).
+  buscarDadosDoServidor(categoria, renderizarTela);
+}
+
+// ================================================================
+// INICIALIZAÇÃO AUTOMÁTICA
+// ================================================================
+// Assim que a página abre pela primeira vez, nós já chamamos a função 'todos' 
+// para o site não iniciar totalmente em branco.
+filtrarGaleria('todos');
+
+/*
+===================================================================
+                      RESUMO DA ÓPERA:
+===================================================================
+O botão chama 'filtrarGaleria' ➔ que avisa o servidor e entrega a 
+função de desenho como um pacote (Callback) ➔ O servidor espera 1s 
+➔ O servidor filtra os dados ➔ O servidor abre o pacote e roda o 
+Callback entregando os dados filtrados ➔ A tela é atualizada!
+===================================================================
+*/

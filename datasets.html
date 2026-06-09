@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WDD 330 - Dataset Activity</title>
+  <link rel="stylesheet" href="dataset.css">
+  
+</head>
+<body>
+
+  <h1>Alimentos e Propriedade Dataset</h1>
+  
+  <ul id="items">
+    <li data-name="banana" data-category="fruit" data-color="yellow">Banana</li>
+    <li data-name="carrot" data-category="vegetable" data-color="orange">Carrot</li>
+    <li data-name="blueberry" data-category="fruit" data-color="blue">Blueberry</li>
+  </ul>
+
+  <script src="dataset.js"></script>
+</body>
+</html>
+
+
+/* ============================================================================
+      COMO O PROCESSADOR LÊ E EXECUTA CADA LINHA DESTE SCRIPT
+============================================================================
+
+Olá, humano. Eu sou o processador da sua máquina. Vou te explicar exatamente 
+o que eu faço, passo a passo, quando você me manda rodar esse arquivo. 
+Minha leitura é sempre de cima para baixo, linha por linha.
+
+============================================================================ */
+
+/* PASSO 1: MONITORAMENTO DO DOM (DOCUMENT OBJECT MODEL)
+Aqui, eu recebo a instrução de varrer o arquivo HTML que está aberto no navegador. 
+Eu procuro por uma tag 'ul' que tenha o ID chamado 'items' e pego todos os 'li' 
+que estão dentro dela[cite: 153, 154, 159]. Eu guardo essas referências físicas 
+em uma caixinha de memória constante chamada 'items'[cite: 159]. 
+Para mim, isso agora é uma lista (NodeList) contendo 3 elementos[cite: 154].
+*/
+const items = document.querySelectorAll('#items li'); 
+
+
+/* PASSO 2: O LOOP DE LOGS NO CONSOLE
+Aqui, eu utilizo a instrução 'forEach'[cite: 159]. Isso significa que vou passar 
+por cada um dos 3 itens da lista, um por um, aplicando a função que você escreveu[cite: 159].
+*/
+items.forEach(item => {
+  
+  /* Eu abro o meu sistema de saída de dados (o console) e escrevo uma linha divisória. */
+  console.log('--- Item Detectado ---');
+  
+  /* Aqui eu acesso a propriedade '.dataset' do elemento atual[cite: 111, 157]. 
+  Eu olho para o HTML e traduzo o atributo customizado 'data-name'[cite: 143, 154]. 
+  No primeiro item, eu acho "banana" e imprimo no console: 'Name: banana'[cite: 154, 161]. 
+  */
+  console.log('Name:', item.dataset.name);         
+  
+  /* Procuro o atributo 'data-category' no HTML[cite: 144, 154]. Imprimo o valor encontrado[cite: 157, 162]. */
+  console.log('Category:', item.dataset.category); 
+  
+  /* Procuro o atributo 'data-color' no HTML[cite: 145, 154]. Imprimo o valor encontrado[cite: 157, 163]. */
+  console.log('Color:', item.dataset.color);       
+});
+
+
+/* PASSO 3: CRIAÇÃO DINÂMICA DE ELEMENTOS
+Eu recebo a ordem de fabricar uma nova tag HTML do tipo 'div' diretamente na memória do 
+computador, mas ela ainda não aparece na tela[cite: 166]. Eu guardo esse elemento invisível 
+em uma caixinha chamada 'details'[cite: 166].
+*/
+const details = document.createElement('div'); 
+
+
+/* Aqui, eu modifico as propriedades dessa 'div' que acabei de criar na memória. 
+Eu adiciono um atributo 'id' nela com o valor "details-box", para que o seu arquivo CSS 
+saiba como colori-la e estilizá-la mais tarde.
+*/
+details.id = "details-box"; 
+
+
+/* Instrução de inserção física: Eu pego a 'div' invisível (details) e coloco ela 
+dentro do 'body' do HTML[cite: 166]. Agora ela existe oficialmente na estrutura da página, 
+mas está vazia.
+*/
+document.body.appendChild(details); 
+
+
+/* PASSO 4: CONFIGURAÇÃO DOS ESCUTADORES DE EVENTOS (EVENT LISTENERS)
+Eu passo novamente pelos 3 itens ('li') usando o 'forEach'[cite: 171]. 
+Para cada um deles, eu ativo um sensor de clique ('click')[cite: 164, 172]. 
+Eu deixo esses sensores ligados em segundo plano. Eu NÃO rodo o código de dentro do 
+escutador agora; eu apenas fico esperando o usuário clicar[cite: 164, 172].
+*/
+items.forEach(item => { 
+  
+  /* Eu configuro o sensor. Quando o dedo do usuário clicar neste 'li' específico, eu dispararei a função abaixo[cite: 164, 172]: */
+  item.addEventListener('click', () => { 
+    
+    /* O USUÁRIO CLICOU! 
+    Neste exato milésimo de segundo, eu acordo e executo o bloco abaixo[cite: 164, 172].
+    Eu mudo o conteúdo interno daquela div 'details' (`innerHTML`)[cite: 173].
+    Eu uso as crases (Template Literals) para construir novas tags de texto (`<h2>` e `<p>`)[cite: 174, 175].
+    
+    A mágica do seu PDF acontece aqui: usando `${item.dataset.propriedade}`, eu volto lá no HTML 
+    do item específico que foi clicado, extraio os valores que estavam guardados no 'data-*' 
+    e injeto esses textos direto no meio do novo HTML[cite: 175, 177, 178].
+    */
+    details.innerHTML = `
+      <h2>Item Details</h2>
+      <p>Name: ${item.dataset.name}</p>
+      <p>Category: ${item.dataset.category}</p>
+      <p>Color: ${item.dataset.color}</p>
+    `; 
+  });
+});
+
+/* ============================================================================
+      FIM DO SCRIPT: Rotina inicial concluída com sucesso. 
+      Navegador pronto e aguardando interações do usuário.
+============================================================================ */

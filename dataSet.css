@@ -1,0 +1,47 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  background-color: #f9f9f9;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.1s;
+}
+
+li:hover {
+  transform: scale(1.02);
+}
+
+/* Estilização baseada nos atributos data-category do PDF */
+li[data-category="fruit"] {
+  background-color: lightyellow; /* [cite: 184, 186] */
+}
+
+li[data-category="vegetable"] {
+  background-color: lightgreen; /* [cite: 187] */
+}
+
+li[data-category="dairy"] {
+  background-color: lightblue; /* [cite: 189] */
+}
+
+/* Estilização para a caixinha de detalhes que o JS cria */
+#details-box {
+  margin-top: 20px;
+  padding: 15px;
+  border: 2px dashed #333;
+  background-color: white;
+  max-width: 300px;
+  border-radius: 8px;
+}

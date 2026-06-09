@@ -1,0 +1,59 @@
+/*
+DESAFIO DE PROGRAMAÇÃO:
+"Escreva um código no qual você cria uma função que serve como uma fábrica de contadores. 
+Dentro dela, existe uma variável oculta que começa em 0. Essa função deve retornar uma segunda função interna.
+
+Toda vez que você chamar essa função interna guardada em uma constante, ela deve somar +1 àquela 
+variável oculta e mostrar o resultado.
+
+No console, ao chamar essa constante três vezes seguidas, deve aparecer visualmente:
+1
+2
+3
+
+Garanta que ninguém consiga alterar o valor desse contador diretamente pelo escopo global, apenas chamando a função."
+*/
+
+(function() {
+  // Tudo o que nasce aqui dentro, MORRE aqui dentro!
+  let count = 0; 
+  let url = 'https://jsonplaceholder.typicode.com/posts';
+  
+  console.log("Código rodou com segurança!");
+})(); 
+
+// Se você tentar acessar aqui fora:
+console.log(count); // Erro! A máquina diz: "count não existe"
+
+function contagemRecursiva(numero) {
+  // 1. Caso Base (Ponto de parada)
+  if (numero === 0) {
+    console.log("Fogo! 🚀");
+    return; // Para a execução
+  }
+
+  // O que ela faz na rodada atual
+  console.log(numero);
+
+  // 2. Caso Recursivo (Chama ela mesma tirando 1)
+  contagemRecursiva(numero - 1);
+}
+
+// Executando:
+contagemRecursiva(3);
+
+// 1. Criamos a função que vai fazer o trabalho de esperar
+function configurarAlarme(segundos, acaoDeDisparar) {
+  console.log(`Alarme definido para daqui a ${segundos} segundos...`);
+  
+  // O setTimeout do JavaScript espera o tempo passar antes de rodar
+  setTimeout(acaoDeDisparar, segundos * 1000); 
+}
+
+// 2. Criamos a função que será o nosso CALLBACK (a ação posterior)
+function tocarMusica() {
+  console.log("Acorda, o café está pronto! ☕⏰");
+}
+
+// 3. Passamos a função 'tocarMusica' como um argumento (sem os parênteses dela!)
+configurarAlarme(3, tocarMusica);
